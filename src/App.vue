@@ -1,32 +1,66 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <body>
+      
+      <div class="card">
+    <router-view />
+      </div>
+    </body>
+
   </div>
 </template>
 
+
+<script>
+
+export default {
+  name: 'App'
+}
+</script>
+
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-nav {
-  padding: 30px;
+body {
+  background: #ccc;
+  font-family: "Nunito", sans-serif;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+
+.card {
+  background: white  ;
+  max-width: 620px;
+  max-height: 100%;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 0 3vw;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+.logo {
+  padding-top: 50px;
+  display:flex;
+  justify-content: center;
 }
+
+@media (max-width: 768px){
+
+body {
+  background: white;
+  height: 100%;
+  
+}
+
+.card {
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+}
+
+}
+
 </style>

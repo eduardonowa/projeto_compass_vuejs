@@ -1,0 +1,112 @@
+.formFull {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 3vh 0vw;
+    color: #767676;
+  }
+  
+  .formFull .formNameFull {
+    width: 100%;
+  }
+  
+  .formFull .formEmailFull,
+  .formFull .formPwFull {
+    width: 60%;
+  }
+  
+  .formFull .formNameFull,
+  .formFull .formEmailFull {
+    padding-bottom: 20px;
+  }
+  
+  .formFull .formPhoneFull,
+  .formFull .formBirthFull {
+    width: 40%;
+    padding-left: 3vw;
+  }
+  
+  .formFull input {
+    margin: 0 auto;
+    display: block;
+    border: 2px solid #aaaaaa;
+    border-radius: 4px;
+    height: 3em;
+    background: white;
+    padding: 0 10px;
+    color: #767676;
+  }
+  
+  .formFull input:focus {
+    outline: 0;
+  }
+  
+  .formName,
+  .formEmail,
+  .formPhone,
+  .formPw,
+  .formBirth {
+    width: 100%;
+  }
+
+
+  @media (max-width: 768px) {
+    .formFull {
+      margin: 2vh auto;
+    }
+  
+    .formFull .formNameFull,
+    .formFull .formEmailFull {
+      padding-bottom: 20px;
+    }
+  
+    .formPhoneFull,
+    .formBirthFull {
+      order: 1;
+    }
+  
+    .formEmailFull,
+    .formPwFull {
+      width: 100% !important;
+    }
+  
+    .formPhoneFull,
+    .formBirthFull {
+      width: 50% !important;
+      display: flex;
+      flex-flow: column wrap;
+      padding: 0px !important;
+      margin-top: 2vh;
+    }
+  
+    .formPhone,
+    .formBirth {
+      display: flex !important;
+      width: 95%;
+    }
+  
+    .formBirthFull {
+      padding-right: 2vw;
+      align-content: flex-end;
+    }
+  
+    .formBirth {
+      justify-content: flex-end;
+    }
+  
+    .formPhone {
+      margin: 0px !important;
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
+  
+  @media (max-height: 750px) {
+    .formFull {
+      margin: 1vh auto;
+    }
+  
+    .formFull .form1,
+    .formFull .form2 {
+      padding-bottom: 10px;
+    }
+  }
