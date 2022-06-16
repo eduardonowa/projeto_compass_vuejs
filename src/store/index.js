@@ -22,7 +22,10 @@ export default new Vuex.Store({
           name
         )
       ) {
+        window.localStorage.setItem("Full Name:", name);
         return true;
+      } else {
+        window.localStorage.setItem("Full Name:", "");
       }
     },
     setEmail(state, email) {
@@ -32,42 +35,57 @@ export default new Vuex.Store({
           email
         )
       ) {
-        
-        console.log('caio viado');
+        window.localStorage.setItem("Email:", email);
+
+        return true;
       } else {
-        console.log('nowa hetero');
+        window.localStorage.setItem("Email:", "");
       }
     },
 
     setPassword(state, password) {
       state.password = password;
       if (/^[0-9]{6,9}$/.test(password)) {
-        console.log("boa");
+        console.log(password);
+        window.localStorage.setItem("Password:", password);
+        return true;
       } else {
-        console.log("n vai dar");
+        window.localStorage.setItem("Password:", "");
       }
     },
     setPhone(state, phone) {
       state.phone = phone;
-      console.log(phone);
-    },
-    setBirthday(state, birthday) {
-      state.birthday = birthday;
-      console.log(birthday);
-    },
-    setCheckbox(state, checkbox) {
-      state.checkbox = checkbox;
-      if (checkbox.checked){
-        console.log("marcada");
-      }else {
-        console.log("desmarcada");
-
+      if (/^[0-9]{11}$/.test(phone)) {
+        window.localStorage.setItem("Phone:", phone);
+        return true;
+      } else {
+        window.localStorage.setItem("Phone:", "");
       }
     },
-    setButton(state, button) {
-      state.button = button;
-      console.log(button);
-    },
+  },
+  setBirthday(state, birthday) {
+    state.birthday = birthday;
+    console.log(birthday);
+    const yearBirth = birthday.substring(0, 4);
+    const date = new Date();
+    const ano = date.getFullYear();
+    const age = ano - yearBirth;
+    if (age > 0 && age <= 121) {
+      window.localStorage.setItem("Birthday:", birthday);
+    } else {
+      window.localStorage.setItem("Birthday:", "");
+    }
+  },
+  setCheckbox(state, checkbox) {
+    state.checkbox = checkbox;
+    if (checkbox.true) {
+      console.log("marcada");
+    }
+  },
+
+  setButton(state, button) {
+    state.button = button;
+    console.log(button);
   },
   actions: {
     setName({ commit }, name) {

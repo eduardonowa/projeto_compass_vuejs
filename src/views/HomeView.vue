@@ -80,7 +80,7 @@
             id="checkbox"
             required
             @input="getValue"
-            v-model="checkbox"
+     
           />
           <span class="geekmark"></span>
           <span class="label-text">I accept the terms and privacy</span>
@@ -91,7 +91,6 @@
         type="submit"
         classInput="button-register"
         valueInput="Register"
-        v-model="button"
         @input="getValue"
       />
     </div>
