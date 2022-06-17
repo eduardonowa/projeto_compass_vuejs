@@ -31,6 +31,7 @@
         smallClass="classSmall"
         invalidText="Email Invalid"
         fieldInput="Email *"
+        :hasError="this.$store.state.emailError"
          
       />
       <InputsType
@@ -44,6 +45,7 @@
         smallClass="classSmall"
         invalidText="Phone Invalid"
         fieldInput="Phone *"
+        :hasError="this.$store.state.phoneError"
       />
       <InputsType
         placeholderInput="Password"
@@ -56,6 +58,8 @@
         smallClass="classSmall"
         invalidText="Password Invalid"
         fieldInput="Password *"
+        :hasError="this.$store.state.pwError"
+        
       />
       <InputsType
         type="date"
@@ -67,6 +71,7 @@
         smallClass="classSmall"
         invalidText="Age Invalid"
         fieldInput="Birthday *"
+        :hasError="this.$store.state.ageError"
       />
     </div>
 
@@ -81,11 +86,12 @@
             id="checkbox"
             required
             @input="getValue"
+            
           />
           <span class="geekmark"></span>
           <span class="label-text">I accept the terms and privacy</span>
         </label>
-        <small id="small5" class="classSmall">You must accept the terms</small>
+        <small id="small5" class="classSmall" v-if="this.$store.state.chkError">You must accept the terms</small>
       </div>
       <InputsType
         type="submit"
