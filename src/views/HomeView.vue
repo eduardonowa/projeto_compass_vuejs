@@ -17,6 +17,7 @@
         smallClass="classSmall"
         invalidText="Fullname Invalid"
         fieldInput="Full Name *"
+        :hasError="this.$store.state.nameError"
       />
       <InputsType
         placeholderInput="Email"
@@ -30,6 +31,7 @@
         smallClass="classSmall"
         invalidText="Email Invalid"
         fieldInput="Email *"
+         
       />
       <InputsType
         placeholderInput="Phone"
@@ -72,15 +74,13 @@
       <div class="box-terms">
         <label class="terms">
           <input
-            type="checkbox"
+            :type="checkbox"
             name="terms"
-            checked
             value="clickCheckbox"
             class="chk"
             id="checkbox"
             required
             @input="getValue"
-     
           />
           <span class="geekmark"></span>
           <span class="label-text">I accept the terms and privacy</span>
@@ -110,16 +110,18 @@ export default {
     return {
       classSmall: "",
       button: "submit",
-      checkbox: "checkbox"
+      checkbox: "checkbox",
     };
   },
   methods: {
-    ...mapActions(["setCheckbox", "setButton"]),
+    ...mapActions(["setCheckbox"]),
     getValue(e) {
-      if (this.button === "submit") {
-        this.setButton(e.target.value);
-      } else if (this.checkbox === "checkbox") {
-        this.setCheckbox(e.target.value);
+      if (this.checkbox === "checkbox") {
+        if (e.target.checked){
+          this.setCheckbox(true)
+        }else {
+          this.setCheckbox(false)
+        }
       }
     },
   },
@@ -152,14 +154,7 @@ export default {
   text-align: center;
 }
 
-.classSmall {
-  visibility: visible;
-  color: red;
-  display: block;
-  padding-left: 5px;
-  font-size: 1em;
-  padding-top: 5px;
-}
+
 
 #footer {
   display: flex;

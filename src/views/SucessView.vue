@@ -1,46 +1,50 @@
 <template>
   <div class="pageSucess">
     <div id="header-sucess">
-        <div class="logo">
-          <img src="../assets/data1.png" alt="" />
-        </div>
+      <div class="logo">
+        <img src="../assets/data1.png" alt="" />
+      </div>
       <h1>Sucess</h1>
     </div>
-          <div class="button-goback">
-          <input @click="goBack()" type="button" value="Go Back!" class="goback" onClick="goBack(event)" />
-      </div>
+    <div class="button-goback">
+      <input
+        @click="goBack"
+        type="button"
+        value="Go Back!"
+        class="goback"
+        onClick="goBack()"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SucessView',
+  name: "SucessView",
   methods: {
-          goBack(){
-      this.$router.push('/');      
-    }
-  }
-}
+    goBack() {
+      this.$router.push("/");
+      this.$store.state.name = "";
+      localStorage.clear();
+    },
+  },
+};
 </script>
 
-
 <style scooped>
-
-  .pageSucess {
-    padding-top: 15vw;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 700px;
-  }
-
- img {
+.pageSucess {
+  padding-top: 15vw;
   display: flex;
+  flex-flow: column;
+  align-items: center;
   justify-content: center;
-
+  min-height: 700px;
 }
 
+img {
+  display: flex;
+  justify-content: center;
+}
 
 #header-sucess h1 {
   font-family: "Inter", sans-serif;
@@ -76,32 +80,25 @@ export default {
   background: #0ca1a1;
   cursor: pointer;
 }
-@media (max-width: 768px){
-
-#header-sucess h1 {
-  padding-bottom: 8vh;
-}
-
-.pageSucess {
-  height: 100%;
-  width: 100%;
-  padding-top: 0
-
-}
-
-.button-goback {
-  width: 90%;
-  margin: 0 auto;
+@media (max-width: 768px) {
+  #header-sucess h1 {
+    padding-bottom: 8vh;
   }
 
-.goback {
-  width: 100%;
-  height: 10vh;
+  .pageSucess {
+    height: 100%;
+    width: 100%;
+    padding-top: 0;
+  }
 
+  .button-goback {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .goback {
+    width: 100%;
+    height: 10vh;
+  }
 }
-
-}
-
-
-
 </style>

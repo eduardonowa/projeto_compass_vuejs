@@ -9,9 +9,11 @@
       :id="idInput"
       :value="valueInput"
       @input="getValue"
-      
+      @click="register"
     />
-    <small :id="small" :class="smallClass">{{ invalidText }}</small>
+    <small :id="small" :class="smallClass" v-if="hasError">
+      {{ invalidText }}</small
+    >
   </div>
 </template>
 
@@ -39,12 +41,18 @@ export default {
       type: String,
       default: "",
     },
-    smallClass: {
-      type: String,
-      default: "clear",
-    },
+    smallClass: String,
     invalidText: String,
     fieldInput: String,
+    hasError: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      handleError: this.$store.state.showError,
+    };
   },
 
   methods: {
@@ -54,7 +62,10 @@ export default {
       "setPassword",
       "setPhone",
       "setBirthday",
+      "setButton",
+      "setNameError",
     ]),
+
     getValue(e) {
       if (this.type === "text") {
         this.setName(e.target.value);
@@ -66,6 +77,38 @@ export default {
         this.setPhone(e.target.value);
       } else if (this.type === "email") {
         this.setEmail(e.target.value);
+      } else if (this.type === "submit") {
+        this.setButton(e.target.value);
+      }
+    },
+    register() {
+      if (this.type === "submit") {
+        const nameInput = this.$store.state.name;
+        console.log(nameInput);
+        // const emailInput = this.$store.state.email
+        // const passwordInput = this.$store.state.password
+        // const phoneInput = this.$store.state.phone
+        // const birthdayInput = this.$store.state.birthday
+        // const checkboxInput = this.$store.state.checkbox
+
+        if ((this.checkName(nameInput)))  {
+          // this.$router.push("/SucessView");
+        }
+      }
+    },
+
+    checkName(value) {
+      if (
+        /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(
+          value
+        )
+      ) {
+        window.localStorage.setItem("name", value);
+         this.setNameError(false);
+        return true;
+      } else {
+        window.localStorage.setItem("name", "");
+        this.setNameError(true);
       }
     },
   },
