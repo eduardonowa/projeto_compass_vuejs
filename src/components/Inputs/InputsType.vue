@@ -7,11 +7,9 @@
       :class="classInput"
       :placeholder="placeholderInput"
       :id="idInput"
-      :value="valueInput"
       @input="getValue"
-      @click.prevent="register()"
     />
-    <small :id="small" :class="smallClass" v-if="hasError">
+    <small :id="small" :class="smallClass" v-show="hasError">
       {{ invalidText }}</small
     >
   </div>
@@ -20,8 +18,96 @@
 <script>
 import { mapActions } from "vuex";
 
-export function funcionando() {
-  console.log("name");
+export function register() {
+  // e.preventDefault();
+    const createLs = (name, data) => {
+       window.localStorage.setItem(name, data);
+    };
+
+    const nameInput = this.$store.state.name;
+    if (
+      /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(
+        nameInput
+      )
+    ) {
+      this.setNameError(false);
+      createLs("name", nameInput);
+    } else {
+      createLs("name", "");
+      this.setNameError(true);
+    }
+
+    const emailInput = this.$store.state.email;
+    if (
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        emailInput
+      )
+    ) {
+      this.setEmailError(false);
+      createLs("email", emailInput);
+    } else {
+      createLs("email", "");
+      this.setEmailError(true);
+    }
+
+    const pwInput = this.$store.state.password;
+    if (/^[0-9]{6,9}$/.test(pwInput)) {
+      this.setPwError(false);
+      createLs("password", pwInput);
+    } else {
+      createLs("password", "");
+      this.setPwError(true);
+    }
+
+    const phoneInput = this.$store.state.phone;
+    if (/^[0-9]{11}$/.test(phoneInput)) {
+      this.setPhoneError(false);
+      createLs("phone", phoneInput);
+    } else {
+      createLs("phone", "");
+      this.setPhoneError(true);
+    }
+
+    const ageInput = this.$store.state.birthday;
+    const yearBirth = ageInput.substring(0, 4);
+    const date = new Date();
+    const ano = date.getFullYear();
+    const age = ano - yearBirth;
+    if (age >= 0 && age <= 121) {
+      this.setAgeError(false);
+      createLs("age", ageInput);
+    } else {
+      createLs("age", "");
+      this.setAgeError(true);
+    }
+
+    const chkInput = this.$store.state.checkbox;
+    if (chkInput) {
+      this.setChkError(false);
+      createLs("checkbox", chkInput);
+    } else {
+      createLs("checkbox", "");
+      this.setChkError(true);
+    }
+
+    const nameStorage = window.localStorage.getItem("name");
+    const emailStorage = window.localStorage.getItem("email");
+    const pwStorage = window.localStorage.getItem("password");
+    const phoneStorage = window.localStorage.getItem("phone");
+    const chkStorage = window.localStorage.getItem("checkbox");
+    const ageStorage = window.localStorage.getItem("age");
+
+    if (
+      nameStorage &&
+      emailStorage &&
+      pwStorage &&
+      phoneStorage &&
+      chkStorage &&
+      ageStorage
+    ) {
+      this.$router.push("/SucessView");
+    }
+  
 }
 
 export default {
@@ -36,11 +122,6 @@ export default {
     type: String,
     classForm: String,
     classLabel: String,
-    small: String,
-    valueInput: {
-      type: String,
-      default: "",
-    },
     smallClass: String,
     invalidText: String,
     fieldInput: String,
@@ -51,11 +132,13 @@ export default {
   },
   data() {
     return {
-      handleError: this.$store.state.showError,
+      small: "",
     };
   },
 
   methods: {
+    
+
     ...mapActions([
       "setName",
       "setEmail",
@@ -86,97 +169,9 @@ export default {
         this.setButton(e.target.value);
       }
     },
-    register() {
-      if (this.type === "submit") {
-        const createLS = (name, data) => {
-          return window.localStorage.setItem(name, data);
-        };
-
-        const nameInput = this.$store.state.name;
-        if (
-          /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(
-            nameInput
-          )
-        ) {
-          this.setNameError(false);
-          createLS("name", nameInput);
-        } else {
-          createLS("name", "");
-          this.setNameError(true);
-        }
-
-        const emailInput = this.$store.state.email;
-        if (
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-            emailInput
-          )
-        ) {
-          this.setEmailError(false);
-          createLS("email", emailInput);
-        } else {
-          createLS("email", "");
-          this.setEmailError(true);
-        }
-
-        const pwInput = this.$store.state.password;
-        if (/^[0-9]{6,9}$/.test(pwInput)) {
-          this.setPwError(false);
-          createLS("password", pwInput);
-        } else {
-          createLS("password", "");
-          this.setPwError(true);
-        }
-
-        const phoneInput = this.$store.state.phone;
-        if (/^[0-9]{11}$/.test(phoneInput)) {
-          this.setPhoneError(false);
-          createLS("phone", phoneInput);
-        } else {
-          createLS("phone", "");
-          this.setPhoneError(true);
-        }
-
-        const ageInput = this.$store.state.birthday;
-        const yearBirth = ageInput.substring(0, 4);
-        const date = new Date();
-        const ano = date.getFullYear();
-        const age = ano - yearBirth;
-        if (age >= 0 && age <= 121) {
-          this.setAgeError(false);
-          window.localStorage.setItem("age", ageInput);
-        } else {
-          window.localStorage.setItem("age", "");
-          this.setAgeError(true);
-        }
-
-        const chkInput = this.$store.state.checkbox;
-        if (chkInput) {
-          this.setChkError(false);
-          createLS("checkbox", chkInput);
-        } else {
-          createLS("checkbox", "");
-          this.setChkError(true);
-        }
-
-        const nameStorage = window.localStorage.getItem("name");
-        const emailStorage = window.localStorage.getItem("email");
-        const pwStorage = window.localStorage.getItem("password");
-        const phoneStorage = window.localStorage.getItem("phone");
-        const chkStorage = window.localStorage.getItem("checkbox");
-        const ageStorage = window.localStorage.getItem("age");
-
-        if (
-          nameStorage &&
-          emailStorage &&
-          pwStorage &&
-          phoneStorage &&
-          chkStorage &&
-          ageStorage
-        ) {
-          this.$router.push("/SucessView");
-        }
-      }
-    },
+  },
+  beforeMount(){
+    localStorage.clear()
   },
 };
 </script>

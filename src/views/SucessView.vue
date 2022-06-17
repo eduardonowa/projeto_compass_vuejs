@@ -25,6 +25,11 @@ export default {
     goBack() {
       this.$router.push("/");
       this.$store.state.name = "";
+      this.$store.state.email = "";
+      this.$store.state.phone = "";
+      this.$store.state.password = "";
+      this.$store.state.checkbox = "";
+      this.$store.state.birthday = "";
       localStorage.clear();
     },
   },

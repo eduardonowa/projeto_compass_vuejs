@@ -13,7 +13,6 @@
         idInput="Fullname"
         classForm="formNameFull"
         classLabel="label1"
-        value="fullName"
         smallClass="classSmall"
         invalidText="Fullname Invalid"
         fieldInput="Full Name *"
@@ -25,14 +24,12 @@
         classInput="formEmail"
         labelInput="email"
         idInput="Email"
-        valueInput=""
         classForm="formEmailFull"
         classLabel="label2"
         smallClass="classSmall"
         invalidText="Email Invalid"
         fieldInput="Email *"
         :hasError="this.$store.state.emailError"
-         
       />
       <InputsType
         placeholderInput="Phone"
@@ -59,7 +56,6 @@
         invalidText="Password Invalid"
         fieldInput="Password *"
         :hasError="this.$store.state.pwError"
-        
       />
       <InputsType
         type="date"
@@ -86,24 +82,26 @@
             id="checkbox"
             required
             @input="getValue"
-            
           />
           <span class="geekmark"></span>
           <span class="label-text">I accept the terms and privacy</span>
         </label>
-        <small id="small5" class="classSmall" v-if="this.$store.state.chkError">You must accept the terms</small>
+        <small id="small5" class="classSmall" v-if="this.$store.state.chkError"
+          >You must accept the terms</small
+        >
       </div>
-      <InputsType
+      <input
         type="submit"
-        classInput="button-register"
-        valueInput="Register"
-        @input="getValue"
+        value="Register"
+        class="button-register"
+        @click="register()"
       />
     </div>
   </div>
 </template>
 
 <script>
+import { register } from "../components/Inputs/InputsType.vue";
 import { mapActions } from "vuex";
 import InputsType from "../components/Inputs/InputsType.vue";
 
@@ -120,13 +118,29 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["setCheckbox"]),
+    register,
+
+    ...mapActions([
+      "setCheckbox",
+      "setName",
+      "setEmail",
+      "setPassword",
+      "setPhone",
+      "setBirthday",
+      "setButton",
+      "setNameError",
+      "setEmailError",
+      "setPwError",
+      "setPhoneError",
+      "setAgeError",
+      "setChkError",
+    ]),
     getValue(e) {
       if (this.checkbox === "checkbox") {
-        if (e.target.checked){
-          this.setCheckbox(true)
-        }else {
-          this.setCheckbox(false)
+        if (e.target.checked) {
+          this.setCheckbox(true);
+        } else {
+          this.setCheckbox(false);
         }
       }
     },
@@ -159,8 +173,6 @@ export default {
   color: #111111;
   text-align: center;
 }
-
-
 
 #footer {
   display: flex;
