@@ -37,7 +37,7 @@ body {
   max-width: 620px;
   max-height: 100%;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 50px;
   padding: 0 3vw;
 }
 

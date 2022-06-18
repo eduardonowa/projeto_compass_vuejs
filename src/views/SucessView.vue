@@ -38,7 +38,7 @@ export default {
 
 <style scooped>
 .pageSucess {
-  padding-top: 10vw;
+  padding-top: 7vw;
   display: flex;
   flex-flow: column;
   align-items: center;
