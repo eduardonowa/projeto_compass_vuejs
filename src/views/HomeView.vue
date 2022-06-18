@@ -6,11 +6,10 @@
     <h1 id="title">Intern Sign Up</h1>
     <div class="formFull">
       <InputsType
-        placeholderInput="Full name"
+        placeholder="Name"
         type="text"
         classInput="formName"
-        labelInput="name"
-        idInput="Fullname"
+        id="Fullname"
         classForm="formNameFull"
         classLabel="label1"
         smallClass="classSmall"
@@ -19,11 +18,10 @@
         :hasError="this.$store.state.nameError"
       />
       <InputsType
-        placeholderInput="Email"
+        placeholder="foo@bar.com"
         type="email"
         classInput="formEmail"
-        labelInput="email"
-        idInput="Email"
+        id="Email"
         classForm="formEmailFull"
         classLabel="label2"
         smallClass="classSmall"
@@ -32,24 +30,23 @@
         :hasError="this.$store.state.emailError"
       />
       <InputsType
-        placeholderInput="Phone"
-        type="number"
+        placeholder="Phone"
+        type="tel"
         classInput="formPhone"
-        labelInput="phone"
-        idInput="Phone"
+        id="Phone"
         classForm="formPhoneFull"
         classLabel="label3"
         smallClass="classSmall"
         invalidText="Phone Invalid"
         fieldInput="Phone *"
         :hasError="this.$store.state.phoneError"
+        v-mask="['(##) #####-####']" 
       />
       <InputsType
-        placeholderInput="Password"
+        placeholder="Enter your password"
         type="password"
         classInput="formPw"
-        labelInput="password"
-        idInput="Password"
+        id="Password"
         classForm="formPwFull"
         classLabel="label4"
         smallClass="classSmall"
@@ -60,8 +57,7 @@
       <InputsType
         type="date"
         classInput="formBirth"
-        labelInput="birthday"
-        idInput="Birthday"
+        id="Birthday"
         classForm="formBirthFull"
         classLabel="label5"
         smallClass="classSmall"
@@ -104,17 +100,30 @@
 import { register } from "../components/Inputs/InputsType.vue";
 import { mapActions } from "vuex";
 import InputsType from "../components/Inputs/InputsType.vue";
+import {mask} from 'vue-the-mask'
+
 
 export default {
   name: "HomeView",
   components: {
     InputsType,
   },
+  directives: {
+    mask,
+  },
   data() {
     return {
       classSmall: "",
       button: "submit",
       checkbox: "checkbox",
+      watch: {
+        caio(v) {
+          v = v.replace(/\D/g, ""); //Remove tudo o que não é dígito
+          v = v.replace(/^(\d{2})(\d)/g, "($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+          v = v.replace(/(\d)(\d{4})$/, "$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
+          return v;
+        },
+      },
     };
   },
   methods: {

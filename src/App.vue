@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <body>
+
       
       <div class="card">
     <router-view />
       </div>
-    </body>
+
 
   </div>
 </template>

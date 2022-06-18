@@ -1,12 +1,12 @@
 <template>
   <div :class="classForm">
-    <label :class="classLabel" :for="labelInput">{{ fieldInput }} </label>
+    <label :class="classLabel" >{{ fieldInput }} </label>
     <input
       :type="type"
       required
       :class="classInput"
-      :placeholder="placeholderInput"
-      :id="idInput"
+      :placeholder="placeholder"
+      :id="id"
       @input="getValue"
     />
     <small :id="small" :class="smallClass" v-show="hasError">
@@ -19,105 +19,102 @@
 import { mapActions } from "vuex";
 
 export function register() {
-  // e.preventDefault();
-    const createLs = (name, data) => {
-       window.localStorage.setItem(name, data);
-    };
+  const createLs = (name, data) => {
+    window.localStorage.setItem(name, data);
+  };
 
-    const nameInput = this.$store.state.name;
-    if (
-      /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(
-        nameInput
-      )
-    ) {
-      this.setNameError(false);
-      createLs("name", nameInput);
-    } else {
-      createLs("name", "");
-      this.setNameError(true);
-    }
+  const nameInput = this.$store.state.name;
+  if (
+    /^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)/.test(
+      nameInput
+    )
+  ) {
+    this.setNameError(false);
+    createLs("name", nameInput);
+  } else {
+    createLs("name", "");
+    this.setNameError(true);
+  }
 
-    const emailInput = this.$store.state.email;
-    if (
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        emailInput
-      )
-    ) {
-      this.setEmailError(false);
-      createLs("email", emailInput);
-    } else {
-      createLs("email", "");
-      this.setEmailError(true);
-    }
+  const emailInput = this.$store.state.email;
+  if (
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      emailInput
+    )
+  ) {
+    this.setEmailError(false);
+    createLs("email", emailInput);
+  } else {
+    createLs("email", "");
+    this.setEmailError(true);
+  }
 
-    const pwInput = this.$store.state.password;
-    if (/^[0-9]{6,9}$/.test(pwInput)) {
-      this.setPwError(false);
-      createLs("password", pwInput);
-    } else {
-      createLs("password", "");
-      this.setPwError(true);
-    }
+  const pwInput = this.$store.state.password;
+  if (/^[0-9]{6,9}$/.test(pwInput)) {
+    this.setPwError(false);
+    createLs("password", pwInput);
+  } else {
+    createLs("password", "");
+    this.setPwError(true);
+  }
 
-    const phoneInput = this.$store.state.phone;
-    if (/^[0-9]{11}$/.test(phoneInput)) {
-      this.setPhoneError(false);
-      createLs("phone", phoneInput);
-    } else {
-      createLs("phone", "");
-      this.setPhoneError(true);
-    }
+  const phoneInput = this.$store.state.phone;
+  if (/^[0-9]{11}$/.test(phoneInput)) {
+    this.setPhoneError(false);
+    createLs("phone", phoneInput);
+  } else {
+    createLs("phone", "");
+    this.setPhoneError(true);
+  }
 
-    const ageInput = this.$store.state.birthday;
-    const yearBirth = ageInput.substring(0, 4);
-    const date = new Date();
-    const ano = date.getFullYear();
-    const age = ano - yearBirth;
-    if (age >= 0 && age <= 121) {
-      this.setAgeError(false);
-      createLs("age", ageInput);
-    } else {
-      createLs("age", "");
-      this.setAgeError(true);
-    }
+  const ageInput = this.$store.state.birthday;
+  const yearBirth = ageInput.substring(0, 4);
+  const date = new Date();
+  const ano = date.getFullYear();
+  const age = ano - yearBirth;
+  if (age >= 0 && age <= 121) {
+    this.setAgeError(false);
+    createLs("age", ageInput);
+  } else {
+    createLs("age", "");
+    this.setAgeError(true);
+  }
 
-    const chkInput = this.$store.state.checkbox;
-    if (chkInput) {
-      this.setChkError(false);
-      createLs("checkbox", chkInput);
-    } else {
-      createLs("checkbox", "");
-      this.setChkError(true);
-    }
+  const chkInput = this.$store.state.checkbox;
+  if (chkInput) {
+    this.setChkError(false);
+    createLs("checkbox", chkInput);
+  } else {
+    createLs("checkbox", "");
+    this.setChkError(true);
+  }
 
-    const nameStorage = window.localStorage.getItem("name");
-    const emailStorage = window.localStorage.getItem("email");
-    const pwStorage = window.localStorage.getItem("password");
-    const phoneStorage = window.localStorage.getItem("phone");
-    const chkStorage = window.localStorage.getItem("checkbox");
-    const ageStorage = window.localStorage.getItem("age");
+  const nameStorage = window.localStorage.getItem("name");
+  const emailStorage = window.localStorage.getItem("email");
+  const pwStorage = window.localStorage.getItem("password");
+  const phoneStorage = window.localStorage.getItem("phone");
+  const chkStorage = window.localStorage.getItem("checkbox");
+  const ageStorage = window.localStorage.getItem("age");
 
-    if (
-      nameStorage &&
-      emailStorage &&
-      pwStorage &&
-      phoneStorage &&
-      chkStorage &&
-      ageStorage
-    ) {
-      this.$router.push("/SucessView");
-    }
-  
+  if (
+    nameStorage &&
+    emailStorage &&
+    pwStorage &&
+    phoneStorage &&
+    chkStorage &&
+    ageStorage
+  ) {
+    this.$router.push("/SucessView");
+  }
 }
 
 export default {
   name: "InputsType",
   components: {},
   props: {
-    placeholderInput: String,
-    classInput: String,
-    idInput: String,
-    labelInput: String,
+    placeholder:String,
+    classInput:String,
+    id:String,
     showInput: String,
     type: String,
     classForm: String,
@@ -137,8 +134,6 @@ export default {
   },
 
   methods: {
-    
-
     ...mapActions([
       "setName",
       "setEmail",
@@ -161,17 +156,15 @@ export default {
         this.setPassword(e.target.value);
       } else if (this.type === "date") {
         this.setBirthday(e.target.value);
-      } else if (this.type === "number") {
-        this.setPhone(e.target.value);
+      } else if (this.type === "tel") {
+        const newPhone = e.target.value.replace(/\W/g, "")
+        this.setPhone(newPhone);
       } else if (this.type === "email") {
         this.setEmail(e.target.value);
       } else if (this.type === "submit") {
         this.setButton(e.target.value);
       }
     },
-  },
-  beforeMount(){
-    localStorage.clear()
   },
 };
 </script>
