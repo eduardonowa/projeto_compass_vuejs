@@ -4,7 +4,7 @@
       <div class="logo">
         <img src="../assets/data1.png" alt="" />
       </div>
-      <h1>Sucess</h1>
+      <h1>Success</h1>
     </div>
     <div class="button-goback">
       <input
@@ -38,7 +38,7 @@ export default {
 
 <style scooped>
 .pageSucess {
-  padding-top: 15vw;
+  padding-top: 10vw;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -66,14 +66,21 @@ img {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  margin: 10vh auto 150px;
+  margin: 10vh auto 100px;
+
+  
 }
 
+
+
 .goback {
-  padding: 0px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 55px;
   font-size: 2.25em;
-  width: 269px;
-  height: 177px;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   border: none;
   background: #0dbdbd;
@@ -98,12 +105,12 @@ img {
 
   .button-goback {
     width: 90%;
+    height: 20%;
     margin: 0 auto;
   }
 
-  .goback {
-    width: 100%;
-    height: 10vh;
+  .goback{
+    padding: 20px;
   }
 }
 </style>
