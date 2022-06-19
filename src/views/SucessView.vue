@@ -12,7 +12,6 @@
         type="button"
         value="Go Back!"
         class="goback"
-        onClick="goBack()"
       />
     </div>
   </div>
@@ -67,11 +66,7 @@ img {
   justify-content: center;
   align-items: center;
   margin: 10vh auto 100px;
-
-  
 }
-
-
 
 .goback {
   display: flex;
@@ -109,7 +104,7 @@ img {
     margin: 0 auto;
   }
 
-  .goback{
+  .goback {
     padding: 20px;
   }
 }

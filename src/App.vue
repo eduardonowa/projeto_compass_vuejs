@@ -1,23 +1,16 @@
 <template>
   <div id="app">
-
-      
-      <div class="card">
-    <router-view />
-      </div>
-
-
+    <div class="card">
+      <router-view />
+    </div>
   </div>
 </template>
 
-
 <script>
-
 export default {
-  name: 'App'
-}
+  name: "App",
+};
 </script>
-
 
 <style>
 * {
@@ -31,9 +24,8 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
-
 .card {
-  background: white  ;
+  background: white;
   max-width: 620px;
   max-height: 100%;
   margin: 0 auto;
@@ -43,24 +35,20 @@ body {
 
 .logo {
   padding-top: 50px;
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
+  body {
+    background: white;
+    height: 100%;
+  }
 
-body {
-  background: white;
-  height: 100%;
-  
+  .card {
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+  }
 }
-
-.card {
-  margin: 0 auto;
-  height: 100%;
-  width: 100%;
-}
-
-}
-
 </style>

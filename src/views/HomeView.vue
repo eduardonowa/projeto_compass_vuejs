@@ -40,7 +40,7 @@
         invalidText="Phone Invalid"
         fieldInput="Phone *"
         :hasError="this.$store.state.phoneError"
-        v-mask="['(##) #####-####']" 
+        v-mask="['(##) #####-####']"
       />
       <InputsType
         placeholder="Enter your password"
@@ -100,8 +100,7 @@
 import { register } from "../components/Inputs/InputsType.vue";
 import { mapActions } from "vuex";
 import InputsType from "../components/Inputs/InputsType.vue";
-import {mask} from 'vue-the-mask'
-
+import { mask } from "vue-the-mask";
 
 export default {
   name: "HomeView",
